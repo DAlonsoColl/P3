@@ -1,3 +1,4 @@
+
 /// @file
 
 #include <iostream>
@@ -11,10 +12,16 @@ namespace upc {
   void PitchAnalyzer::autocorrelation(const vector<float> &x, vector<float> &r) const {
 
     for (unsigned int l = 0; l < r.size(); ++l) {
-  		/// \TODO Compute the autocorrelation r[l]
+  		/// MODIFICADO
+      ///  \TODO Compute the autocorrelation r[l]
+      for (unsigned int n = 0; n < x.size() - l; ++n)
+      {
+        r[l] += x[n + l] * x[n];
+      }
+      r[l] = r[l] / x.size();
     }
 
-    if (r[0] == 0.0F) //to avoid log() and divide zero 
+    if (r[0] <= 0.0F) //to avoid log() and divide zero 
       r[0] = 1e-10; 
   }
 
@@ -50,7 +57,10 @@ namespace upc {
     /// \TODO Implement a rule to decide whether the sound is voiced or not.
     /// * You can use the standard features (pot, r1norm, rmaxnorm),
     ///   or compute and use other ones.
-    return true;
+    
+    ///return true; ///codigo original (considera tramas sordas)
+    return false; /// Apaño provisional (consideramos tramas sonoras (excepto la primera y la última que, por cómo está implementado el
+    /// programa principal, siempre se consideran sordas) ).
   }
 
   float PitchAnalyzer::compute_pitch(vector<float> & x) const {
@@ -61,7 +71,7 @@ namespace upc {
     for (unsigned int i=0; i<x.size(); ++i)
       x[i] *= window[i];
 
-    vector<float> r(npitch_max);
+    vector<float> r(npitch_max + 1);
 
     //Compute correlation
     autocorrelation(x, r);
@@ -76,8 +86,19 @@ namespace upc {
     ///	   .
 	/// In either case, the lag should not exceed that of the minimum value of the pitch.
 
-    unsigned int lag = iRMax - r.begin();
+    ///unsigned int lag = iRMax - r.begin();
 
+    unsigned int lag = npitch_min;
+    float rMax = r[npitch_min];
+  
+    for (unsigned int l = npitch_min + 1; l <= npitch_max; ++l){
+        if (r[l] > rMax){
+            lag = l;
+            rMax = r[l]; 
+        }
+        
+    }
+    
     float pot = 10 * log10(r[0]);
 
     //You can print these (and other) features, look at them using wavesurfer
