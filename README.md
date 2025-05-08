@@ -15,7 +15,7 @@ Ejercicios básicos
 
    * Complete el cálculo de la autocorrelación e inserte a continuación el código correspondiente.
 
-![Cálculo autocorrelación](Imagenes/1.png)
+![Cálculo autocorrelación]([Imagenes/1.png](https://github.com/DAlonsoColl/P3/blob/f24a33645d2de33e3fa3573a3866fa539120295a/1.png))
 
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un segmento de
      unos 30 ms de un fonema sonoro y su periodo de pitch; y, en otro *subplot*, se vea con claridad la
