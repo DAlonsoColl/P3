@@ -33,7 +33,11 @@ Este es el código de nuestro MATLAB:
    * Determine el mejor candidato para el periodo de pitch localizando el primer máximo secundario de la
      autocorrelación. Inserte a continuación el código correspondiente.
 
+![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_4.png)
+
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
+
+![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_5.png)
 
    * Puede serle útil seguir las instrucciones contenidas en el documento adjunto `código.pdf`.
 
@@ -48,6 +52,8 @@ Este es el código de nuestro MATLAB:
 		(r[0]), la autocorrelación normalizada de uno (r1norm = r[1] / r[0]) y el valor de la
 		autocorrelación en su máximo secundario (rmaxnorm = r[lag] / r[0]).
 
+	![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_6.png)
+
 		Puede considerar, también, la conveniencia de usar la tasa de cruces por cero.
 
 	    Recuerde configurar los paneles de datos para que el desplazamiento de ventana sea el adecuado, que
@@ -56,6 +62,8 @@ Este es el código de nuestro MATLAB:
       - Use el estimador de pitch implementado en el programa `wavesurfer` en una señal de prueba y compare
 	    su resultado con el obtenido por la mejor versión de su propio sistema.  Inserte una gráfica
 		ilustrativa del resultado de ambos estimadores.
+
+	![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_7.png)
      
 		Aunque puede usar el propio Wavesurfer para obtener la representación, se valorará
 	 	el uso de alternativas de mayor calidad (particularmente Python).
@@ -63,6 +71,8 @@ Este es el código de nuestro MATLAB:
   * Optimice los parámetros de su sistema de estimación de pitch e inserte una tabla con las tasas de error
     y el *score* TOTAL proporcionados por `pitch_evaluate` en la evaluación de la base de datos 
 	`pitch_db/train`..
+
+	![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_8.png)
 
 Ejercicios de ampliación
 ------------------------
@@ -77,17 +87,33 @@ Ejercicios de ampliación
   * Inserte un *pantallazo* en el que se vea el mensaje de ayuda del programa y un ejemplo de utilización
     con los argumentos añadidos.
 
+    ![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_9.png)
+
 - Implemente las técnicas que considere oportunas para optimizar las prestaciones del sistema de estimación
   de pitch.
 
   Entre las posibles mejoras, puede escoger una o más de las siguientes:
 
   * Técnicas de preprocesado: filtrado paso bajo, diezmado, *center clipping*, etc.
+ 
+	![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_10.png)
+
   * Técnicas de postprocesado: filtro de mediana, *dynamic time warping*, etc.
+ 
+	![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_11.png)
+
   * Métodos alternativos a la autocorrelación: procesado cepstral, *average magnitude difference function*
     (AMDF), etc.
   * Optimización **demostrable** de los parámetros que gobiernan el estimador, en concreto, de los que
     gobiernan la decisión sonoro/sordo.
+
+	![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_12.png)
+
+	Se ha incorporado el cálculo de los cruces por cero al criterio para determinar si un segmento es sonoro o sordo. Ahora la clasificación se basa en dos condiciones
+	simultáneas: si la energía está por debajo de un cierto umbral y la tasa de cruces por cero supera otro umbral, el segmento se considera como sordo.
+
+	![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_13.png)
+
   * Cualquier otra técnica que se le pueda ocurrir o encuentre en la literatura.
 
   Encontrará más información acerca de estas técnicas en las [Transparencias del Curso](https://atenea.upc.edu/pluginfile.php/2908770/mod_resource/content/3/2b_PS%20Techniques.pdf)
