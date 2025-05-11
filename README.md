@@ -14,6 +14,7 @@ Ejercicios básicos
   `get_pitch`.
 
    * Complete el cálculo de la autocorrelación e inserte a continuación el código correspondiente.
+     
 ![Image Alt](https://github.com/DAlonsoColl/P3/blob/599c44ae60b0d3cedd28e17fbb8fd06e43ae2693/Im_1.png)
 
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un segmento de
@@ -22,6 +23,12 @@ Ejercicios básicos
 
 	 NOTA: es más que probable que tenga que usar Python, Octave/MATLAB u otro programa semejante para
 	 hacerlo. Se valorará la utilización de la biblioteca matplotlib de Python.
+
+![Image Alt](https://github.com/DAlonsoColl/P3/blob/56c8f37a039d4f586b8089867ee614e5a16b9a4a/Im_2.png)
+
+Este es el código de nuestro MATLAB:
+
+![Image Alt](https://github.com/DAlonsoColl/P3/blob/56c8f37a039d4f586b8089867ee614e5a16b9a4a/Im_3.png)
 
    * Determine el mejor candidato para el periodo de pitch localizando el primer máximo secundario de la
      autocorrelación. Inserte a continuación el código correspondiente.
