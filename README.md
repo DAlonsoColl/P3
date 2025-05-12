@@ -28,7 +28,7 @@ Ejercicios básicos
 
 Este es el código de nuestro MATLAB:
 
-
+![Image Alt](https://github.com/DAlonsoColl/P3/blob/c3f94b27bf47819c3c496ad65e68af77f3514aa6/Im_3_.png)
 
    * Determine el mejor candidato para el periodo de pitch localizando el primer máximo secundario de la
      autocorrelación. Inserte a continuación el código correspondiente.
