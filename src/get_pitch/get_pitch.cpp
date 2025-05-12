@@ -10,7 +10,7 @@
 
 #include "docopt.h"
 
-#define FRAME_LEN   0.030 /* 30 ms. */
+#define FRAME_LEN   0.031 /* 30 ms. */ ///< OPTIMIZADO
 #define FRAME_SHIFT 0.015 /* 15 ms. */
 
 using namespace std;
@@ -27,6 +27,7 @@ Usage:
 Options:
     -h, --help  Show this screen
     --version   Show the version of the project
+    -1, --alpha1=FLOAT  Variable a utilizar unicamente para optimizar parámetros como FRAME_LEN o els valors de pot, r1, rmax, zcr [default: 0.5] 
 
 Arguments:
     input-wav   Wave file with the audio signal
@@ -39,6 +40,7 @@ int main(int argc, const char *argv[]) {
 	/// \TODO 
 	///  Modify the program syntax and the call to **docopt()** in order to
 	///  add options and arguments to the program.
+  /// \MODIFICADO
     std::map<std::string, docopt::value> args = docopt::docopt(USAGE,
         {argv + 1, argv + argc},	// array of arguments, without the program name
         true,    // show help if requested
@@ -46,6 +48,7 @@ int main(int argc, const char *argv[]) {
 
 	std::string input_wav = args["<input-wav>"].asString();
 	std::string output_txt = args["<output-txt>"].asString();
+  float alpha1 = stof(args["--alpha1"].asString());
 
   // Read input sound file
   unsigned int rate;
@@ -59,12 +62,22 @@ int main(int argc, const char *argv[]) {
   int n_shift = rate * FRAME_SHIFT;
 
   // Define analyzer
-  PitchAnalyzer analyzer(n_len, rate, PitchAnalyzer::RECT, 50, 500);
+  PitchAnalyzer analyzer(n_len, rate, alpha1, PitchAnalyzer::RECT, 50, 500); //LLAMAMOS CONSTRUCTOR
 
   /// \TODO
   /// Preprocess the input signal in order to ease pitch estimation. For instance,
   /// central-clipping or low pass filtering may be used.
-  
+  /// \MODIFICADO
+
+
+  float max_val= *max_element(x.begin(),x.end());
+  //Filtro Center Clipping
+  for(unsigned int i=0; i< x.size();i++){
+    if(abs(x[i])/max_val<0.008){
+      x[i]=0.0;
+    }
+  }
+
   // Iterate for each frame and save values in f0 vector
   vector<float>::iterator iX;
   vector<float> f0;
@@ -76,6 +89,20 @@ int main(int argc, const char *argv[]) {
   /// \TODO
   /// Postprocess the estimation in order to supress errors. For instance, a median filter
   /// or time-warping may be used.
+  /// \MODIFICADO
+
+unsigned int M = 3; ///alpha1
+  vector<float> filtre_mediana(M);
+
+  for (unsigned int i = (M-1)/2; i < f0.size() - (M-1)/2; i++){
+    for (unsigned m = 0; m < M; m++){
+      filtre_mediana[m]=f0[i+m-((M-1)/2)];
+    }
+    sort(filtre_mediana.begin(),filtre_mediana.end()); //Ordenamos los valores
+
+    f0[i]=filtre_mediana[(M-1)/2]; //Obtenemos valor del centro
+  }
+
 
   // Write f0 contour into the output file
   ofstream os(output_txt);
