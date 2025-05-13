@@ -89,6 +89,9 @@ Ejercicios de ampliación
 
     ![Image Alt](https://github.com/DAlonsoColl/P3/blob/ec9d33aedda1d59e9e7f2bad4bfe957383090b04/Im_9.png)
 
+    Para la ejecución del programa, vamos cambiando el valor de alpha1 para optimizar las distintas variables una por una. No hemos creado más parámetros para optimizarlo todo a la
+    vez porque, de lo contrario, la ejecución del programa habría sido mucho (muchísimo) más larga.
+
 - Implemente las técnicas que considere oportunas para optimizar las prestaciones del sistema de estimación
   de pitch.
 
